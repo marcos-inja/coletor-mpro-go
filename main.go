@@ -16,7 +16,7 @@ type confSpec struct {
 const (
 	defaultFileDownloadTimeout = 20 * time.Second // Duração que o coletor deve esperar até que o download de cada um dos arquivos seja concluído
 	defaultGeneralTimeout      = 6 * time.Minute  // Duração máxima total da coleta de todos os arquivos. Valor padrão calculado a partir de uma média de execuções ~4.5min
-	defaulTimeBetweenSteps     = 5 * time.Second //Tempo de espera entre passos do coletor."
+	defaulTimeBetweenSteps     = 7 * time.Second //Tempo de espera entre passos do coletor."
 )
 
 func main() {

@@ -31,7 +31,7 @@ func (c crawler) crawl() ([]string, error) {
 	alloc, allocCancel := chromedp.NewExecAllocator(
 		context.Background(),
 		append(chromedp.DefaultExecAllocatorOptions[:],
-			chromedp.Flag("headless", false), // mude para false para executar com navegador visível.
+			chromedp.Flag("headless", true), // mude para false para executar com navegador visível.
 			chromedp.NoSandbox,
 			chromedp.DisableGPU,
 		)...,
@@ -95,7 +95,6 @@ func (c crawler) abreCaixaDialogo(ctx context.Context, tipo string) error {
 		concatenated = fmt.Sprintf("%s%s%s%s", baseURL, c.year, c.month, finalURL)
 	} else {
 		const (
-			pathRoot = "/html/body/div[2]/input"
 			baseURL  = "https://servicos-portal.mpro.mp.br/plcVis/frameset?__report=..%2FROOT%2Frel%2Fcontracheque%2Fmembros%2FverbasIndenizatoriasMembrosAtivos.rptdesign&anomes="
 		)
 		concatenated = fmt.Sprintf("%s%s%s", baseURL, c.year, c.month)
@@ -122,7 +121,7 @@ func (c crawler) abreCaixaDialogo(ctx context.Context, tipo string) error {
 
 // exportaPlanilha clica no botão correto para exportar para excel, espera um tempo para download renomeia o arquivo.
 func (c crawler) exportaPlanilha(ctx context.Context, fName string) error {
-	err := chromedp.Run(ctx,
+	chromedp.Run(ctx,
 		// Clica no botão de download 
 		chromedp.Click(`/html/body/table/tbody/tr[4]/td[1]/div[1]/div[2]/div/div[2]/div[2]/div/div[1]/input`, chromedp.BySearch, chromedp.NodeVisible),
 	)
