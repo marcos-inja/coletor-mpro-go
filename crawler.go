@@ -69,7 +69,7 @@ func (c crawler) crawl() ([]string, error) {
 		log.Fatalf("Erro no setup:%v", err)
 	}
 	log.Printf("Seleção realizada com sucesso!\n")
-	iFname := c.downloadFilePath("indenizacoes")
+	iFname := c.downloadFilePath("indenizatorias")
 	log.Printf("Fazendo download das indenizações (%s)...", iFname)
 	if err := c.exportaPlanilha(ctx, iFname); err != nil {
 		log.Fatalf("Erro fazendo download dos indenizações: %v", err)
@@ -82,7 +82,7 @@ func (c crawler) crawl() ([]string, error) {
 }
 
 func (c crawler) downloadFilePath(prefix string) string {
-	return filepath.Join(c.output, fmt.Sprintf("%s-%s-%s.csv", prefix, c.year, c.month))
+	return filepath.Join(c.output, fmt.Sprintf("membros-ativos-%s-%s-%s.csv", prefix, c.month, c.year))
 }
 
 func (c crawler) abreCaixaDialogo(ctx context.Context, tipo string) error {
